@@ -8,7 +8,7 @@ import { Gasto } from '../models/Gasto';
   providedIn: 'root'
 })
 export class GastosService {
-  private API_URI = 'https://controlgasto-backend.onrender.com/api/gasto';
+  private API_URI = 'https://controlgasto-back.onrender.com/api/gasto';
 
   constructor(private http: HttpClient) { }
 

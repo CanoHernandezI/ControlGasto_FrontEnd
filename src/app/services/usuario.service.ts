@@ -8,7 +8,7 @@ import { Usuario } from '../models/Usuario';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private API_URI = 'https://controlgasto-backend.onrender.com/api/usuario'; // backend
+  private API_URI = 'https://controlgasto-back.onrender.com/api/usuario'; // backend
 
   constructor(private http: HttpClient) { }
 

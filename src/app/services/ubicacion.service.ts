@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UbicacionService {
-  private apiUrl = 'https://controlgasto-backend.onrender.com/api/ubicacion'; 
+  private apiUrl = 'https://controlgasto-back.onrender.com/api/ubicacion'; 
 
   constructor(private http: HttpClient) {}
 
