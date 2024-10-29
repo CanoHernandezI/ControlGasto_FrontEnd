@@ -8,7 +8,7 @@ import { Servicio } from '../models/Servicio';
   providedIn: 'root'
 })
 export class ServiciosService {
-  private API_URI = 'http://localhost:3000/api/servicio';
+  private API_URI = 'https://controlgasto-backend.onrender.com/api/servicio';
 
   constructor(private http: HttpClient) { }
 

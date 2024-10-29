@@ -39,6 +39,41 @@ export class UbicacionComponent implements OnInit {
       this.obtenerUbicacion();
       this.iniciarRuta();
       this.obtenerRutas();
+
+      // Añadir capa de lugares de interés (POI)
+      this.map.addSource('places', {
+        type: 'vector',
+        url: 'mapbox://mapbox.mapbox-streets-v8'
+      });
+      
+      this.map.addLayer({
+        id: 'poi-labels',
+        type: 'symbol',
+        source: 'places',
+        'source-layer': 'poi_label',
+        layout: {
+          'text-field': ['get', 'name'],
+          'text-size': 12,
+          'icon-image': ['concat', ['get', 'maki'], '-15'],
+          'icon-size': 1.2
+        },
+        paint: {
+          'text-color': '#555',
+          'text-halo-color': '#fff',
+          'text-halo-width': 1
+        }
+      });
+
+      // Agregar interacción para mostrar nombres de lugares
+      this.map.on('click', 'poi-labels', (e) => {
+        const coordinates = e.lngLat;
+        const name = e.features?.[0].properties["name"] || 'Lugar sin nombre';
+
+        new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(`<h3>${name}</h3>`)
+          .addTo(this.map);
+      });
     });
   }
 
