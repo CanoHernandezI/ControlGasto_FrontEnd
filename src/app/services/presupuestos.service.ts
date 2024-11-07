@@ -8,7 +8,7 @@ import { Presupuesto } from '../models/Presupuesto';
   providedIn: 'root'
 })
 export class PresupuestosService {
-  private API_URI = 'https://controlgasto-back.onrender.com/presupuesto';
+  private API_URI = 'https://controgasto-backend.onrender.com/api/presupuesto';
 
   constructor(private http: HttpClient) { }
 

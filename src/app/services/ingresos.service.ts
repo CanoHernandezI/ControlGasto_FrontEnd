@@ -8,7 +8,7 @@ import { Ingreso } from '../models/Ingreso';
   providedIn: 'root'
 })
 export class IngresosService {
-  private API_URI = 'https://controlgasto-back.onrender.com/api/ingreso';
+  private API_URI = 'https://controgasto-backend.onrender.com/api/ingreso';
 
   constructor(private http: HttpClient) { }
 

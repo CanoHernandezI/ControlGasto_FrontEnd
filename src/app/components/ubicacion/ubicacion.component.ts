@@ -133,15 +133,33 @@ export class UbicacionComponent implements OnInit {
   }
 
   dibujarRuta(ruta: any) {
-    if (ruta.ubicaciones.length > 0) {
-      this.map?.flyTo({ center: [ruta.ubicaciones[0].Longitud, ruta.ubicaciones[0].Latitud], zoom: 12 });
-      ruta.ubicaciones.forEach((ubicacion: any) => {
-        new mapboxgl.Marker()
-          .setLngLat([ubicacion.Longitud, ubicacion.Latitud])
-          .addTo(this.map);
+    // Limpiar marcadores previos si los hay
+    const markers = document.getElementsByClassName('marker');
+    while (markers[0]) {
+      markers[0].parentNode?.removeChild(markers[0]);
+    }
+  
+    if (ruta.ubicaciones && ruta.ubicaciones.length > 0) {
+      // Centrar el mapa en el primer punto de la ruta
+      this.map?.flyTo({
+        center: [ruta.ubicaciones[0].Longitud, ruta.ubicaciones[0].Latitud],
+        zoom: 12
       });
+  
+      // Dibujar los marcadores de la ruta
+      ruta.ubicaciones.forEach((ubicacion: any) => {
+        // Solo agregar marcador si las coordenadas son válidas
+        if (ubicacion.Longitud && ubicacion.Latitud) {
+          new mapboxgl.Marker({ className: 'marker' })
+            .setLngLat([ubicacion.Longitud, ubicacion.Latitud])
+            .addTo(this.map);
+        }
+      });
+    } else {
+      console.warn('No hay ubicaciones en la ruta seleccionada');
     }
   }
+  
 
   irALaUbicacionActual() {
     navigator.geolocation.getCurrentPosition(

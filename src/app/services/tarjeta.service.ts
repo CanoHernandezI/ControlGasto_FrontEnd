@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class TarjetaService {
 
-  private apiUrl = 'https://controlgasto-back.onrender.com/api/tarjetas';  
+  private apiUrl = 'https://controgasto-backend.onrender.com/api/tarjetas';  
 
   constructor(private http: HttpClient) { }
 
