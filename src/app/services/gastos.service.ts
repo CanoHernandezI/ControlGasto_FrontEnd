@@ -8,7 +8,7 @@ import { Gasto } from '../models/Gasto';
   providedIn: 'root'
 })
 export class GastosService {
-  private API_URI = 'https://controgasto-backend.onrender.com/api/gasto';
+  private API_URI = 'https://controgasto-backend-1.onrender.com/api/gasto';
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +22,6 @@ export class GastosService {
     return this.http.get<Gasto>(`${this.API_URI}/${idUser}/${id}`).pipe(
       map((gasto: Gasto) => {
         if (gasto.FechaTransaccion) {
-          // Transformar FechaTransaccion a YYYY-MM-DD
           gasto.FechaTransaccion = gasto.FechaTransaccion.split('T')[0];
         }
         return gasto;

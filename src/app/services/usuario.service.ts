@@ -8,7 +8,7 @@ import { Usuario } from '../models/Usuario';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private API_URI = 'https://controgasto-backend.onrender.com/api/usuario'; 
+  private API_URI = 'https://controgasto-backend-1.onrender.com/api/usuario'; 
 
   constructor(private http: HttpClient) { }
 

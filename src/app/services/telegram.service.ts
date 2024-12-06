@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TelegramService {
-  private apiUrl = 'https://controgasto-backend.onrender.com/api/telegram/simulate'; 
+  private apiUrl = 'https://controgasto-backend-1.onrender.com/api/telegram/simulate'; 
 
   constructor(private http: HttpClient) { }
 

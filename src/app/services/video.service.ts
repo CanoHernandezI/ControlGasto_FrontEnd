@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class VideoService {
-  private apiUrl = 'https://controgasto-backend.onrender.com/api/videos/search';
+  private apiUrl = 'https://controgasto-backend-1.onrender.com/api/videos/search';
 
   constructor(private http: HttpClient) {}
 
