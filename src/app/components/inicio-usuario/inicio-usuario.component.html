@@ -105,8 +105,8 @@
                 <hr>
             </div>
         </div>
-        <div class="floating-container-youtube main" id="youtube-popup"
-            [style.display]="isYoutubePopupVisible ? 'block' : 'none'">
+        <div class="floating-container-youtube main" id="youtube-popup" [style.display]="isYoutubePopupVisible ? 'block' : 'none'">
+            <button class="close-btn" (click)="closeYoutubePopup()">X</button>
             <div class="currentplaying">
                 <i class="fab fa-youtube"></i>
                 <p class="heading">Bienvenido a YouTube</p>
@@ -133,8 +133,8 @@
             </div>
 
         </div>
-        <div class="floating-container-telegram" id="telegram-popup"
-            [style.display]="isTelegramPopupVisible ? 'block' : 'none'">
+        <div class="floating-container-telegram" id="telegram-popup" [style.display]="isTelegramPopupVisible ? 'block' : 'none'">
+            <button class="close-btn" (click)="closeTelegramPopup()">X</button>
             <div class="chat-card">
                 <div class="chat-header">
                     <div class="h2">Telegram ChatBot</div>
@@ -153,8 +153,8 @@
             </div>
 
         </div>
-        <div class="floating-container-google" id="google-popup"
-            [style.display]="isGooglePopupVisible ? 'block' : 'none'">
+        <div class="floating-container-google" id="google-popup" [style.display]="isGooglePopupVisible ? 'block' : 'none'">
+            <button class="close-btn" (click)="closeGooglePopup()">X</button>
             <div class="searchbar">
                 <div class="searchbar-wrapper">
                     <div class="searchbar-left">

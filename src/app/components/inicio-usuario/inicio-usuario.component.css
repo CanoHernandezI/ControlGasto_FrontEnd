@@ -1147,3 +1147,28 @@ li:hover .tooltip {
   }
 }
 
+
+/* Asegurar que el botón "X" sea visible en todas las ventanas flotantes */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fcfcfc00; /* Fondo rojo para destacar */
+  border: none;
+  color: rgb(5, 4, 4);
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%; /* Estilo redondo */
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+.close-btn:hover {
+  background-color: #d32f2f00;
+}
+

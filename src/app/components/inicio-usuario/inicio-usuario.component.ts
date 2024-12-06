@@ -47,9 +47,9 @@ export class InicioUsuarioComponent implements OnInit, AfterViewInit {
     "Cómo mejorar la salud financiera",
     "Consejos de finanzas personales"
   ];
-  
+
   filteredSuggestions: string[] = [];
-  
+
 
   private apiKey: string = 'AIzaSyCkCmBeyvOnhnsPpaIv31_h9T4blk0Sy8A';
   private searchEngineId: string = '72c53c886ef4f4338';
@@ -95,7 +95,7 @@ export class InicioUsuarioComponent implements OnInit, AfterViewInit {
       this.router.navigate(['/login']);
     }
   }
-  
+
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       window.addEventListener('load', () => {
@@ -252,42 +252,42 @@ export class InicioUsuarioComponent implements OnInit, AfterViewInit {
   sendMessage(): void {
     const message = this.messageInput.nativeElement.value;
     if (message.trim()) {
-        this.chatMessages.push({ type: 'outgoing', text: message });
+      this.chatMessages.push({ type: 'outgoing', text: message });
 
-        this.telegramService.sendMessage(this.chatId, message).subscribe(
-            (response) => {
-                if (response && response.message) {
-                    this.chatMessages.push({ type: 'incoming', text: response.message });
+      this.telegramService.sendMessage(this.chatId, message).subscribe(
+        (response) => {
+          if (response && response.message) {
+            this.chatMessages.push({ type: 'incoming', text: response.message });
 
-                    if (response.redirect) {
-                        if (/creación de gastos/i.test(response.message)) {
-                            this.router.navigate(['gastos/add']);
-                        } else if (/listado de gastos/i.test(response.message)) {
-                            this.router.navigate(['gastos/list']);
-                        } else if (/creación de ingresos/i.test(response.message)) {
-                            this.router.navigate(['ingresos/add']);
-                        } else if (/listado de ingresos/i.test(response.message)) {
-                            this.router.navigate(['ingresos/list']);
-                        } else if (/creación de servicios/i.test(response.message)) {
-                            this.router.navigate(['servicios/add']);
-                        } else if (/listado de servicios/i.test(response.message)) {
-                            this.router.navigate(['servicios/list']);
-                        } else if (/resumen/i.test(response.message)) {
-                            this.router.navigate(['resumen']);
-                        }
-                    }
-                } else {
-                    console.error('Respuesta del servidor no contiene un mensaje');
-                }
-            },
-            (error) => {
-                console.error('Error enviando mensaje al bot de Telegram', error);
+            if (response.redirect) {
+              if (/creación de gastos/i.test(response.message)) {
+                this.router.navigate(['gastos/add']);
+              } else if (/listado de gastos/i.test(response.message)) {
+                this.router.navigate(['gastos/list']);
+              } else if (/creación de ingresos/i.test(response.message)) {
+                this.router.navigate(['ingresos/add']);
+              } else if (/listado de ingresos/i.test(response.message)) {
+                this.router.navigate(['ingresos/list']);
+              } else if (/creación de servicios/i.test(response.message)) {
+                this.router.navigate(['servicios/add']);
+              } else if (/listado de servicios/i.test(response.message)) {
+                this.router.navigate(['servicios/list']);
+              } else if (/resumen/i.test(response.message)) {
+                this.router.navigate(['resumen']);
+              }
             }
-        );
+          } else {
+            console.error('Respuesta del servidor no contiene un mensaje');
+          }
+        },
+        (error) => {
+          console.error('Error enviando mensaje al bot de Telegram', error);
+        }
+      );
 
-        this.messageInput.nativeElement.value = '';
+      this.messageInput.nativeElement.value = '';
     }
-}
+  }
 
 
 
@@ -317,29 +317,18 @@ export class InicioUsuarioComponent implements OnInit, AfterViewInit {
       this.query = this.suggestions[randomIndex];
     }
   }
-  
+
 
   onInputChange(query: string) {
     this.filteredSuggestions = this.suggestions.filter(suggestion =>
       suggestion.toLowerCase().includes(query.toLowerCase())
     );
   }
-  
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const isInsidePopup = target.closest('.floating-container, .nav-links, .icon-bar');
-    if (!isInsidePopup) {
-      this.isTweetsPopupVisible = false;
-      this.isYoutubePopupVisible = false;
-      this.isTelegramPopupVisible = false;
-      this.isGooglePopupVisible = false;
-    }
-  }
+
 
   toggleMenu(): void {
     this.isMenuVisible = !this.isMenuVisible;
-  
+
     const body = document.body;
     if (this.isMenuVisible) {
       body.classList.add('no-scroll'); // Bloquea el scroll
@@ -347,8 +336,39 @@ export class InicioUsuarioComponent implements OnInit, AfterViewInit {
       body.classList.remove('no-scroll'); // Permite el scroll
     }
   }
-  
-  
+
+  // Prevenir el cierre de ventanas flotantes al hacer clic fuera de ellas
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const youtubePopup = document.getElementById('youtube-popup');
+    const telegramPopup = document.getElementById('telegram-popup');
+    const googlePopup = document.getElementById('google-popup');
+
+    // Verificar si el clic fue dentro de las ventanas o los botones
+    if (
+      youtubePopup && !youtubePopup.contains(event.target as Node) && !this.isYoutubePopupVisible ||
+      telegramPopup && !telegramPopup.contains(event.target as Node) && !this.isTelegramPopupVisible ||
+      googlePopup && !googlePopup.contains(event.target as Node) && !this.isGooglePopupVisible
+    ) {
+      event.preventDefault();
+    }
+  }
+
+  // Funciones para cerrar las ventanas flotantes al hacer clic en el botón "X"
+closeYoutubePopup(): void {
+  this.isYoutubePopupVisible = false;
 }
+
+closeTelegramPopup(): void {
+  this.isTelegramPopupVisible = false;
+}
+
+closeGooglePopup(): void {
+  this.isGooglePopupVisible = false;
+}
+
+}
+
+
 
 
